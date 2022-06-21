@@ -4,7 +4,7 @@ import { ImageLinkSlider } from "../components/ImageLinkSlider";
 import { displaySimilarTitles, initMovieState } from "../utils";
 
 let IMG_URL = "https://image.tmdb.org/t/p/w500";
-
+//comments
 const Movie = (props) => {
   const [movieDetails, setMovieDetails] = useState(initMovieState);
   const [isTruncated, setIsTruncated] = useState('') 
