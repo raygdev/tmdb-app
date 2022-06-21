@@ -7,20 +7,17 @@ const Home = (props) => {
   const [movies, setMovies] = useState([]);
   
   const {
-    URL,
     toggleMotionPicture,
     motionPicture,
   } = useContext(Context);
-  console.log('home rendered')
   useEffect(() => {
-    fetch(URL)
-      .then((res) => res.json())
-      .then((data) => setMovies(data.results));
-      return () => {
-        fetch(URL)
-      .then((res) => res.json())
-      .then((data) => setMovies(data.results));
-      }
+    fetch(`/api/motionpicture?motionPicture=${motionPicture}`,{method: 'POST'})
+      .then(res => res.json())
+      .then(data => {
+        console.log(data.results)
+        setMovies(prevMovies => data.results)
+      })
+      .catch(e => console.log(e))
   }, [motionPicture]);
 
   const motionPictureTitle = motionPicture === "movie" ? "Movies" : "TV Shows";

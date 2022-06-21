@@ -1,30 +1,28 @@
 import React, {useState, useEffect} from 'react'
 import {useParams, Link} from 'react-router-dom'
 import { ImageLinkSlider } from "../components/ImageLinkSlider";
-import { getTitles, displaySimilarTitles } from "../utils";
+import { displaySimilarTitles } from "../utils";
+
+let IMG_URL = "https://image.tmdb.org/t/p/w500";
 
 const Shows = (props) => {
   const [showDetails, setShowDetails] = useState('');
   const { show_id } = useParams();
-  
-    
-    let IMG_URL = "https://image.tmdb.org/t/p/w500";
+ 
     useEffect(() => {
-        getTitles(`https://api.themoviedb.org/3/tv/${show_id}?api_key=${process.env.REACT_APP_API_KEY}&append_to_response=videos,similar,credits`, (data) => {
-            setShowDetails(data);
-        });
+        fetch(`/api/tvshow/${show_id}`,{method: 'POST'})
+          .then(res => res.json())
+          .then(data => setShowDetails(data))
+          .catch(e => console.log(e))
         
     }, [show_id])
     
-
-   
-  console.log('show rendered')
   
   let genres = showDetails ? showDetails.genres.map((genre, i) => {
         return (
 
             <p className={`genres${i} genre`}  key={genre.id}>
-              {<Link to={`/genres/${genre.id}`}>{genre.name}</Link>}
+              {<Link to={`/genres/${genre.id}/${genre.name}/tv`}>{genre.name}</Link>}
             </p>
         );
       }):null
@@ -46,6 +44,7 @@ const Shows = (props) => {
   let crew = showDetails 
     ? displaySimilarTitles(setImagesFirst, '/people/selected')
     :null
+
   const styles = {
     backgroundColor: 'rgba(0,0,0,0.6)',
     backgroundImage: `url(${IMG_URL}${showDetails.backdrop_path})`,

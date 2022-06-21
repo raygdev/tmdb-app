@@ -115,6 +115,23 @@ nav a {
   text-decoration: none;
   color: inherit;
   font-weight: 600;
+  transition: transform .5s ease, border-bottom .5s ease;
+}
+
+nav a:hover,
+nav a:focus{
+  transform: scale(1.02);
+  border-bottom: 2px solid;
+}
+
+.show-button{
+  cursor:pointer;
+  border-bottom: 2px solid;
+  transition: color .25s;
+}
+
+.show-button:hover{
+      color:#b1e3fa;
 }
 
 /* LAYOUT */

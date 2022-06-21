@@ -1,28 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ImageLinkSlider } from "../components/ImageLinkSlider";
-import { getTitles, displaySimilarTitles, initMovieState } from "../utils";
+import { displaySimilarTitles, initMovieState } from "../utils";
 
 let IMG_URL = "https://image.tmdb.org/t/p/w500";
+
 const Movie = (props) => {
   const [movieDetails, setMovieDetails] = useState(initMovieState);
+  const [isTruncated, setIsTruncated] = useState('') 
   const { id } = useParams();
 
   useEffect(() => {
-    getTitles(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_API_KEY}&append_to_response=videos,similar,credits`,
-      (data) => {
-        setMovieDetails(data);
-      }
-    );
-  }, [id]);
+   
+    fetch(`/api/movie/${id}`,{method: 'POST'})
+      .then(res => res.json())
+      .then(data => {
 
-  console.log("movie rendered");
+        setMovieDetails(data)
+        setIsTruncated(true)
+      })
+    }, [id]);
 
   let genres = movieDetails.genres.map((genre, i) => {
     return (
       <p className={`genres${i} genre`} key={genre.id}>
-        {<Link to={`/genres/${genre.id}`}>{genre.name}</Link>}
+        {<Link to={`/genres/${genre.id}/${genre.name}/movie`}>{genre.name}</Link>}
       </p>
     );
   });
@@ -51,9 +53,15 @@ const Movie = (props) => {
     { year: "numeric", month: "long", day: "numeric" }
   );
   const truncated =
-    movieDetails.overview.length >= 175
+    movieDetails.overview.length > 175
       ? movieDetails.overview.slice(0, 175).trim().concat(`...`)
       : movieDetails.overview;
+
+  function toggleTruncated() {
+    setIsTruncated(prevTruncated => !prevTruncated)
+  }
+
+  const showButton = isTruncated ? 'Show More':'Show Less'
 
   
   return (
@@ -72,7 +80,7 @@ const Movie = (props) => {
           </div>
           <div className="info-col">
             <h2 className="title">{movieDetails.title}</h2>
-            <p>{truncated}</p>
+            <p>{isTruncated ? truncated : movieDetails.overview} <br/><span className="show-button" onClick={toggleTruncated}>{(movieDetails.overview.length > 175) && showButton}</span></p>
             <div className="sub-info">
               <p className="released">Released: {releaseDate}</p>
               <p>Runtime: {movieDetails.runtime} minutes</p>
