@@ -16,7 +16,7 @@ const ContextProvider = ({ children }) => {
   let KEY = process.env.REACT_APP_API_KEY;
 
   let URL = `https://api.themoviedb.org/3/trending/${motionPicture}/week?api_key=${KEY}`
-  console.log('Context render')
+  
   return (
     <Context.Provider
       value={{
