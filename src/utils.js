@@ -2,11 +2,6 @@ import { Link } from "react-router-dom";
 import React from "react";
 
 const imageSource = "https://image.tmdb.org/t/p/w200";
-async function getTitles(url, callback) {
-  const res = await fetch(url);
-  const data = await res.json();
-  return callback(data);
-}
 
 function displaySimilarTitles(titles, path, toggle) {
   let hash = {};
@@ -63,4 +58,4 @@ const initMovieState = {
   },
 };
 
-export { getTitles, displaySimilarTitles, initMovieState };
+export { displaySimilarTitles, initMovieState };
