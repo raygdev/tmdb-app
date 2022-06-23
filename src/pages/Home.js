@@ -1,13 +1,21 @@
 import React, { useState, useEffect, useContext } from "react";
 import { ImageLinkSlider } from "../components/ImageLinkSlider";
 import { Context } from "../hooks/ContextProvider";
+import { useLoading } from "../hooks/useLoading";
 import { displaySimilarTitles } from "../utils";
+
 
 const Home = (props) => {
   const [movies, setMovies] = useState([]);
+  const {
+    isLoading,
+    setIsLoading,
+    loader
+  } = useLoading()
 
   const { toggleMotionPicture, motionPicture } = useContext(Context);
   useEffect(() => {
+    setIsLoading(true)
     fetch(`/api/motionpicture?motionPicture=${motionPicture}`, {
       method: "POST",
     })
@@ -15,6 +23,7 @@ const Home = (props) => {
       .then((data) => {
         console.log(data.results);
         setMovies((prevMovies) => data.results);
+        setIsLoading(false)
       })
       .catch((e) => console.log(e));
   }, [motionPicture]);
@@ -28,12 +37,14 @@ const Home = (props) => {
   );
 
   return (
-    <div>
+    isLoading ? (loader) :
+     (<div>
       <h2 style={{ cursor: "pointer" }} onClick={toggleMotionPicture}>
         {motionPictureTitle}
       </h2>
       <ImageLinkSlider images={trendingMovies} name="Trending" />
-    </div>
+      </div>
+      )
   );
 };
 export default Home;

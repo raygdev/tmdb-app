@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import { useLoading } from "../hooks/useLoading";
 
 let IMG_URL = "https://image.tmdb.org/t/p/w500";
 
@@ -7,9 +8,15 @@ const Genres = (props) => {
   const [moviesFromGenre, setMoviesFromGenre] = useState("");
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState("");
+  const {
+    isLoading,
+    setIsLoading,
+    loader
+  } = useLoading()
   const { genre_id, genre_name, motion_picture } = useParams();
 
   useEffect(() => {
+    setIsLoading(true)
     fetch(
       `/api/genres/?with_genres=${genre_id}&page=${page}&motion_picture=${motion_picture}`,
       { method: "POST" }
@@ -18,6 +25,7 @@ const Genres = (props) => {
       .then((data) => {
         setMoviesFromGenre(data.results);
         setTotalPages(data.total_pages);
+        setIsLoading(false)
       });
     window.scrollTo(0, 0);
   }, [page]);
@@ -35,15 +43,17 @@ const Genres = (props) => {
     : null;
 
   function prevPage() {
+    setIsLoading(true)
     setPage((prevPage) => prevPage - 1);
   }
 
   function nextPage() {
+    setIsLoading(true)
     setPage((nextPage) => nextPage + 1);
   }
 
   return (
-    <div className="genre-page-container">
+    isLoading ? (loader) : (<div className="genre-page-container">
       <h1>{genre_name}</h1>
       <div className="buttons-container">
         <button className="cta-btn" onClick={prevPage} disabled={page === 1}>
@@ -66,7 +76,7 @@ const Genres = (props) => {
           NEXT
         </button>
       </div>
-    </div>
+    </div>)
   );
 };
 export default Genres;

@@ -1,18 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ImageLinkSlider } from "../components/ImageLinkSlider";
+import { useLoading } from "../hooks/useLoading";
 import { displaySimilarTitles } from "../utils";
 
 let IMG_URL = "https://image.tmdb.org/t/p/w500";
 
 const Shows = (props) => {
   const [showDetails, setShowDetails] = useState("");
+  const {
+    isLoading,
+    setIsLoading,
+    loader
+  } = useLoading()
   const { show_id } = useParams();
 
   useEffect(() => {
+    setIsLoading(true)
     fetch(`/api/tvshow/${show_id}`, { method: "POST" })
       .then((res) => res.json())
-      .then((data) => setShowDetails(data))
+      .then((data) => {
+        setShowDetails(data)
+        setIsLoading(false)
+      })
       .catch((e) => console.log(e));
   }, [show_id]);
 
@@ -60,7 +70,7 @@ const Shows = (props) => {
   };
 
   return (
-    <div>
+    isLoading ? (loader) : (<div>
       <div className="movie-info-container" style={styles}>
         <div className="movie-info-content">
           <div className="img-col">
@@ -86,7 +96,7 @@ const Shows = (props) => {
           ? crew[0] && <ImageLinkSlider images={crew} name="Crew" />
           : null}
       </div>
-    </div>
+    </div>)
   );
 };
 

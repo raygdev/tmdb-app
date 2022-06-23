@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ImageLinkSlider } from "../components/ImageLinkSlider";
+import { useLoading } from "../hooks/useLoading";
 import { displaySimilarTitles, initMovieState } from "../utils";
 
 let IMG_URL = "https://image.tmdb.org/t/p/w500";
@@ -8,14 +9,21 @@ let IMG_URL = "https://image.tmdb.org/t/p/w500";
 const Movie = (props) => {
   const [movieDetails, setMovieDetails] = useState(initMovieState);
   const [isTruncated, setIsTruncated] = useState("");
+  const {
+    isLoading,
+    setIsLoading,
+    loader
+  } = useLoading()
   const { id } = useParams();
 
   useEffect(() => {
+    setIsLoading(true)
     fetch(`/api/movie/${id}`, { method: "POST" })
       .then((res) => res.json())
       .then((data) => {
         setMovieDetails(data);
         setIsTruncated(true);
+        setIsLoading(false)
       });
   }, [id]);
 
@@ -66,7 +74,7 @@ const Movie = (props) => {
   const showButton = isTruncated ? "Show More" : "Show Less";
 
   return (
-    <div>
+   isLoading ? (loader) : (<div>
       <div className="movie-info-container" style={styles}>
         <div className="movie-info-content">
           <div className="img-col">
@@ -106,7 +114,7 @@ const Movie = (props) => {
         <ImageLinkSlider images={cast} name="Cast" />
         <ImageLinkSlider images={crew} name="Crew" />
       </div>
-    </div>
+    </div>)
   );
 };
 
