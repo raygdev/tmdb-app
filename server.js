@@ -16,12 +16,7 @@ app.get("/", (req, res) => {
   res.send("hello");
 });
 
-app.post("/api/movie/:id", motionPicture.getMovieInfo);
 
-app.post("/api/motionpicture", motionPicture.getMotionPicture);
-
-app.post("/api/tvshow/:show_id", motionPicture.getShowInfo);
-app.post("/api/genres/", motionPicture.getTitlesWithGenre);
 
 app.listen(port, () => {
   console.log(`App is listening on port ${port}`);
