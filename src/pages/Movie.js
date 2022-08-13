@@ -7,7 +7,7 @@ import { displaySimilarTitles, initMovieState } from "../utils";
 let IMG_URL = "https://image.tmdb.org/t/p/w500";
 //comments
 const Movie = (props) => {
-  const [movieDetails, setMovieDetails] = useState(initMovieState);
+  const [movieDetails, setMovieDetails] = useState([]);
   const [isTruncated, setIsTruncated] = useState("");
   const {
     isLoading,
@@ -27,7 +27,7 @@ const Movie = (props) => {
       });
   }, [id]);
 
-  let genres = movieDetails.genres.map((genre, i) => {
+  let genres = movieDetails?.genres?.map((genre, i) => {
     return (
       <p className={`genres${i} genre`} key={genre.id}>
         {
@@ -41,11 +41,11 @@ const Movie = (props) => {
 
   const { similar, credits } = movieDetails;
 
-  const similarTitle = displaySimilarTitles(similar.results, "/movie/selected");
+  const similarTitle = displaySimilarTitles(similar?.results, "/movie/selected");
 
-  const cast = displaySimilarTitles(credits.cast, "/people/selected");
+  const cast = displaySimilarTitles(credits?.cast, "/people/selected");
 
-  const crew = displaySimilarTitles(credits.crew, "/people/selected");
+  const crew = displaySimilarTitles(credits?.crew, "/people/selected");
 
   const styles = {
     backgroundColor: "rgba(0,0,0,0.8)",
@@ -63,7 +63,7 @@ const Movie = (props) => {
     { year: "numeric", month: "long", day: "numeric" }
   );
   const truncated =
-    movieDetails.overview.length > 175
+    movieDetails?.overview?.length > 175
       ? movieDetails.overview.slice(0, 175).trim().concat(`...`)
       : movieDetails.overview;
 
@@ -92,7 +92,7 @@ const Movie = (props) => {
             <p>
               {isTruncated ? truncated : movieDetails.overview} <br />
               <span className="show-button" onClick={toggleTruncated}>
-                {movieDetails.overview.length > 175 && showButton}
+                {movieDetails?.overview?.length > 175 && showButton}
               </span>
             </p>
             <div className="sub-info">
