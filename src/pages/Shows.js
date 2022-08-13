@@ -26,8 +26,7 @@ const Shows = (props) => {
       .catch((e) => console.log(e));
   }, [show_id]);
 
-  let genres = showDetails
-    ? showDetails.genres.map((genre, i) => {
+  let genres =showDetails?.genres?.map((genre, i) => {
         return (
           <p className={`genres${i} genre`} key={genre.id}>
             {
@@ -37,28 +36,20 @@ const Shows = (props) => {
             }
           </p>
         );
-      })
-    : null;
+      });
 
   const { similar, credits } = showDetails;
 
-  let similarTitle = showDetails
-    ? displaySimilarTitles(similar.results, "/shows/selected")
-    : null;
-  let cast = showDetails
-    ? displaySimilarTitles(credits.cast, "/people/selected")
-    : null;
-  const setImagesFirst = showDetails
-    ? credits.crew.reduce((prev, curre) => {
+  let similarTitle =  displaySimilarTitles(similar?.results, "/shows/selected");
+  let cast = displaySimilarTitles(credits?.cast, "/people/selected");
+  const setImagesFirst = credits?.crew.reduce((prev, curre) => {
         if (!curre.profile_path) {
           prev.push(curre);
         } else prev.unshift(curre);
         return prev;
-      }, [])
-    : null;
-  let crew = showDetails
-    ? displaySimilarTitles(setImagesFirst, "/people/selected")
-    : null;
+      }, []);
+  let crew = displaySimilarTitles(setImagesFirst, "/people/selected")
+    
 
   const styles = {
     backgroundColor: "rgba(0,0,0,0.6)",
@@ -83,7 +74,7 @@ const Shows = (props) => {
         </div>
       </div>
       <div className="genre-col">
-        <h3>Genres:({genres ? genres.length : null})</h3>
+        <h3>Genres:({genres?.length})</h3>
         <div className="genres-container">{genres}</div>
       </div>
       <div className="related-titles-col">
@@ -92,9 +83,7 @@ const Shows = (props) => {
           name={`Titles Related to ${showDetails.name}`}
         />
         <ImageLinkSlider images={cast} name="Cast" />
-        {showDetails
-          ? crew[0] && <ImageLinkSlider images={crew} name="Crew" />
-          : null}
+        { crew  && <ImageLinkSlider images={crew} name="Crew" />}
       </div>
     </div>)
   );
