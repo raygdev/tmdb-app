@@ -36,25 +36,5 @@ function displaySimilarTitles(titles, path, toggle) {
   return images;
 }
 
-const initMovieState = {
-  back_drop: "",
-  genres: [],
-  overview: "",
-  poster_path: "",
-  release_date: "",
-  runtime: "",
-  title: "",
-  vote_average: "",
-  videos: {
-    results: [],
-  },
-  similar: {
-    results: [],
-  },
-  credits: {
-    cast: [{ id: 1, name: "", profile_path: "" }],
-    crew: [{ id: 1, name: "", profile_path: "" }],
-  },
-};
 
-export { displaySimilarTitles, initMovieState };
+export { displaySimilarTitles };
