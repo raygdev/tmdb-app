@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { ImageLinkSlider } from "../components/ImageLinkSlider";
 import { Context } from "../hooks/ContextProvider";
 import { useLoading } from "../hooks/useLoading";
-import { displaySimilarTitles } from "../utils";
+import { displaySimilarTitles } from "../utils/utils";
 
 
 const Home = (props) => {

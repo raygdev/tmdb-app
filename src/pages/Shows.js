@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ImageLinkSlider } from "../components/ImageLinkSlider";
 import { useLoading } from "../hooks/useLoading";
-import { displaySimilarTitles } from "../utils";
+import { displaySimilarTitles } from "../utils/utils";
 
 let IMG_URL = "https://image.tmdb.org/t/p/w500";
 
