@@ -4,5 +4,3 @@
 <p>to run = npm run dev</p>
 
 
-<p>something</p>
-<p>something else</p>
