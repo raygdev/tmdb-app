@@ -312,6 +312,8 @@ nav a:focus {
 .genre-movies {
   display: flex;
   flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 0 auto;;
 }
 
 .genre-links-container {

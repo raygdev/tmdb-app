@@ -15,17 +15,18 @@ const Home = (props) => {
 
   const { toggleMotionPicture, motionPicture } = useContext(Context);
   useEffect(() => {
+    let ignore = false
     setIsLoading(true)
     fetch(`/api/motionpicture?motionPicture=${motionPicture}`, {
       method: "POST",
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.results);
-        setMovies((prevMovies) => data.results);
-        setIsLoading(false)
+          setMovies( data.results);
+          setIsLoading(false)
       })
       .catch((e) => console.log(e));
+      
   }, [motionPicture]);
 
   const motionPictureTitle = motionPicture === "movie" ? "Movies" : "TV Shows";

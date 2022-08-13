@@ -3,7 +3,7 @@ const fetch = require("node-fetch");
 require("dotenv").config();
 const app = express();
 const cors = require("cors");
-const { application } = require("express");
+
 
 const port = process.env.MY_PORT || 5000;
 const key = process.env.API_KEY;
