@@ -5,8 +5,7 @@ const imageSource = "https://image.tmdb.org/t/p/w200";
 
 function displaySimilarTitles(titles, path, toggle) {
   let hash = {};
-  let images = titles
-    .filter(
+  let images = titles?.filter(
       (title) => title.poster_path || title.profile_path || !title.profile_path
     )
     .map((title, i) => {
