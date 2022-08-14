@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ImageLinkSlider } from "../components/ImageLinkSlider";
 import { useLoading } from "../hooks/useLoading";
-import { displaySimilarTitles } from "../utils/utils";
+import { displaySimilarTitles, getGenres, truncate } from "../utils/utils";
 import { movieStyles } from "../utils/styles"
 
 let IMG_URL = "https://image.tmdb.org/t/p/w500";
@@ -28,17 +28,7 @@ const Movie = (props) => {
       });
   }, [id]);
 
-  let genres = movieDetails?.genres?.map((genre, i) => {
-    return (
-      <p className={`genres${i} genre`} key={genre.id}>
-        {
-          <Link to={`/genres/${genre.id}/${genre.name}/movie`}>
-            {genre.name}
-          </Link>
-        }
-      </p>
-    );
-  });
+  let genres = getGenres(movieDetails?.genres)
 
   const { similar, credits } = movieDetails;
 
