@@ -48,17 +48,6 @@ const Movie = (props) => {
 
   const crew = displaySimilarTitles(credits?.crew, "/people/selected");
 
-  const styles = {
-    backgroundColor: "rgba(0,0,0,0.8)",
-    backgroundImage:
-      movieDetails.backdrop_path &&
-      `url(${IMG_URL}${movieDetails.backdrop_path})`,
-    backgroundBlendMode: "multiply",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    color: "white",
-    border: "2px solid white",
-  };
   const releaseDate = new Date(movieDetails.release_date).toLocaleString(
     "en-US",
     { year: "numeric", month: "long", day: "numeric" }
