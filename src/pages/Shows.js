@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ImageLinkSlider } from "../components/ImageLinkSlider";
 import { useLoading } from "../hooks/useLoading";
-import { displaySimilarTitles, setImageFirst, getGenres } from "../utils/utils";
+import { displaySimilarTitles, setImageFirst, getGenres, truncate } from "../utils/utils";
 import { showStyles } from "../utils/styles";
 
 let IMG_URL = "https://image.tmdb.org/t/p/w500";
@@ -31,6 +31,7 @@ const Shows = (props) => {
   let cast = displaySimilarTitles(credits?.cast, "/people/selected");
   const setImagesFirst = setImageFirst(credits?.crew)
   let crew = displaySimilarTitles(setImagesFirst, "/people/selected");
+  let truncated = truncate(showDetails.overview)
 
   return isLoading ? (
     loader
