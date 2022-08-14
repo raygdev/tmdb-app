@@ -45,4 +45,24 @@ function setImageFirst(crew){
   }, [])
 }
 
-export { displaySimilarTitles, setImageFirst };
+function getGenres(genres){
+  return genres?.map((genre, i) => {
+    return (
+      <p className={`genres${i} genre`} key={genre.id}>
+        {
+          <Link to={`/genres/${genre.id}/${genre.name}/movie`}>
+            {genre.name}
+          </Link>
+        }
+      </p>
+    );
+  });
+}
+
+function truncate(string){
+  return string?.length > 175
+  ? string.slice(0, 175).trim().concat(`...`)
+  : string;
+}
+
+export { displaySimilarTitles, setImageFirst, getGenres, truncate };
