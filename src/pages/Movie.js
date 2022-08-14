@@ -65,15 +65,15 @@ const Movie = (props) => {
 
   return (
    isLoading ? (loader) : (<div>
-      <div className="movie-info-container" style={styles}>
+      <div className="movie-info-container" style={{
+        ...movieStyles,
+        backgroundImage:`url(${IMG_URL}${movieDetails?.backdrop_path})`,
+      }}>
         <div className="movie-info-content">
           <div className="img-col">
             <img
-              src={
-                movieDetails.poster_path &&
-                `${IMG_URL}${movieDetails.poster_path}`
-              }
-              alt=""
+              src={`${IMG_URL}${movieDetails?.poster_path}`}
+              alt={movieDetails?.title}
             />
             <p>Released: {releaseDate}</p>
           </div>
