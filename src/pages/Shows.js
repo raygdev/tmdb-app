@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ImageLinkSlider } from "../components/ImageLinkSlider";
 import { useLoading } from "../hooks/useLoading";
-import { displaySimilarTitles } from "../utils/utils";
+import { displaySimilarTitles, setImageFirst } from "../utils/utils";
 import styles from "../utils/styles";
 
 let IMG_URL = "https://image.tmdb.org/t/p/w500";
@@ -35,12 +35,7 @@ const Shows = (props) => {
 
   let similarTitle = displaySimilarTitles(similar?.results, "/shows/selected");
   let cast = displaySimilarTitles(credits?.cast, "/people/selected");
-  const setImagesFirst = credits?.crew.reduce((prev, curre) => {
-    if (!curre.profile_path) {
-      prev.push(curre);
-    } else prev.unshift(curre);
-    return prev;
-  }, []);
+  const setImagesFirst = setImageFirst(credits?.crew)
   let crew = displaySimilarTitles(setImagesFirst, "/people/selected");
 
   return isLoading ? (
