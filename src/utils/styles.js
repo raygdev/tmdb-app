@@ -6,4 +6,13 @@ const showStyles = {
     color: "white",
   };
 
-  export { showStyles }
+  const movieStyles = {
+    backgroundColor: "rgba(0,0,0,0.8)",
+    backgroundBlendMode: "multiply",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    color: "white",
+    border: "2px solid white",
+  };
+
+  export { showStyles, movieStyles }
