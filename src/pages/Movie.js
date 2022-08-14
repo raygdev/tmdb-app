@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { ImageLinkSlider } from "../components/ImageLinkSlider";
 import { useLoading } from "../hooks/useLoading";
 import { displaySimilarTitles, initMovieState } from "../utils/utils";
+import { movieStyles } from "../utils/styles"
 
 let IMG_URL = "https://image.tmdb.org/t/p/w500";
 //comments
