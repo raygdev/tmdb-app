@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { ImageLinkSlider } from "../components/ImageLinkSlider";
 import { useLoading } from "../hooks/useLoading";
 import { displaySimilarTitles, setImageFirst } from "../utils/utils";
-import styles from "../utils/styles";
+import { showStyles } from "../utils/styles";
 
 let IMG_URL = "https://image.tmdb.org/t/p/w500";
 
@@ -45,7 +45,7 @@ const Shows = (props) => {
       <div
         className="movie-info-container"
         style={{
-          ...styles,
+          ...showStyles,
           backgroundImage: `url(${IMG_URL}${showDetails?.backdrop_path})`,
         }}
       >
