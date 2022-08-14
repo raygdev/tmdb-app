@@ -27,9 +27,9 @@ const Shows = (props) => {
 
   const { similar, credits } = showDetails;
 
-  let similarTitle = displaySimilarTitles(similar.results, "/shows/selected");
-  let cast = displaySimilarTitles(credits.cast, "/people/selected");
-  const setImagesFirst = setImageFirst(credits.crew)
+  let similarTitle = displaySimilarTitles(similar?.results, "/shows/selected");
+  let cast = displaySimilarTitles(credits?.cast, "/people/selected");
+  const setImagesFirst = setImageFirst(credits?.crew)
   let crew = displaySimilarTitles(setImagesFirst, "/people/selected");
 
   return isLoading ? (
@@ -40,12 +40,12 @@ const Shows = (props) => {
         className="movie-info-container"
         style={{
           ...showStyles,
-          backgroundImage: `url(${IMG_URL}${showDetails?.backdrop_path})`,
+          backgroundImage: showDetails && `url(${IMG_URL}${showDetails?.backdrop_path})`,
         }}
       >
         <div className="movie-info-content">
           <div className="img-col">
-            <img src={`${IMG_URL}${showDetails.poster_path}`} alt="" />
+            <img src={showDetails && `${IMG_URL}${showDetails.poster_path}`} alt="" />
           </div>
           <div className="info-col">
             <h2 className="title">{showDetails.name}</h2>
