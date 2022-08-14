@@ -69,7 +69,7 @@ const Shows = (props) => {
           name={`Titles Related to ${showDetails.name}`}
         />
         <ImageLinkSlider images={cast} name="Cast" />
-        {crew && <ImageLinkSlider images={crew} name="Crew" />}
+        {crew?.[0] && <ImageLinkSlider images={crew} name="Crew" />}
       </div>
     </div>
   );
