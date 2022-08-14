@@ -1,4 +1,4 @@
-const styles = {
+const showStyles = {
     backgroundColor: "rgba(0,0,0,0.6)",
     backgroundBlendMode: "multiply",
     backgroundRepeat: "no-repeat",
@@ -6,4 +6,4 @@ const styles = {
     color: "white",
   };
 
-  export default styles
+  export { showStyles }
