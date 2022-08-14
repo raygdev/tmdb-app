@@ -36,5 +36,13 @@ function displaySimilarTitles(titles, path, toggle) {
   return images;
 }
 
+function setImageFirst(crew){
+  return crew?.reduce((prev, curre) => {
+    if (!curre.profile_path) {
+      prev.push(curre);
+    } else prev.unshift(curre);
+    return prev;
+  }, [])
+}
 
-export { displaySimilarTitles };
+export { displaySimilarTitles, setImageFirst };
