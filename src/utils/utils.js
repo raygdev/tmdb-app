@@ -36,13 +36,17 @@ function displaySimilarTitles(titles, path, toggle) {
   return images;
 }
 
-function setImageFirst(crew){
-  return crew?.reduce((prev, curre) => {
-    if (!curre.profile_path) {
-      prev.push(curre);
-    } else prev.unshift(curre);
-    return prev;
-  }, [])
+function setImageFirst(people){
+  let image = []
+  let non_image = []
+  people?.forEach(person => {
+      if(!person.profile_path){
+        non_image.push(person)
+      }else{
+        image.push(person)
+      }
+  })
+  return image.concat(non_image)
 }
 
 function getGenres(genres){

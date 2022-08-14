@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ImageLinkSlider } from "../components/ImageLinkSlider";
 import { useLoading } from "../hooks/useLoading";
-import { displaySimilarTitles, getGenres, truncate } from "../utils/utils";
+import { displaySimilarTitles, getGenres, truncate, setImageFirst } from "../utils/utils";
 import { movieStyles } from "../utils/styles"
 
 let IMG_URL = "https://image.tmdb.org/t/p/w500";
@@ -34,9 +34,9 @@ const Movie = (props) => {
 
   const similarTitle = displaySimilarTitles(similar?.results, "/movie/selected");
 
-  const cast = displaySimilarTitles(credits?.cast, "/people/selected");
+  const cast = displaySimilarTitles(setImageFirst(credits?.cast), "/people/selected");
 
-  const crew = displaySimilarTitles(credits?.crew, "/people/selected");
+  const crew = displaySimilarTitles(setImageFirst(credits?.crew), "/people/selected");
 
   const releaseDate = new Date(movieDetails.release_date).toLocaleString(
     "en-US",

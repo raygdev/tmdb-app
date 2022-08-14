@@ -28,9 +28,8 @@ const Shows = (props) => {
   const { similar, credits } = showDetails;
 
   let similarTitle = displaySimilarTitles(similar?.results, "/shows/selected");
-  let cast = displaySimilarTitles(credits?.cast, "/people/selected");
-  const setImagesFirst = setImageFirst(credits?.crew)
-  let crew = displaySimilarTitles(setImagesFirst, "/people/selected");
+  let cast = displaySimilarTitles(setImageFirst(credits?.cast), "/people/selected");
+  let crew = displaySimilarTitles(setImageFirst(credits?.crew), "/people/selected");
   let truncated = truncate(showDetails.overview)
 
   return isLoading ? (
