@@ -42,10 +42,7 @@ const Movie = (props) => {
     "en-US",
     { year: "numeric", month: "long", day: "numeric" }
   );
-  const truncated =
-    movieDetails?.overview?.length > 175
-      ? movieDetails.overview.slice(0, 175).trim().concat(`...`)
-      : movieDetails.overview;
+  const truncated = truncate(movieDetails?.overview);
 
   function toggleTruncated() {
     setIsTruncated((prevTruncated) => !prevTruncated);
