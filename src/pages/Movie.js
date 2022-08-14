@@ -54,12 +54,12 @@ const Movie = (props) => {
    isLoading ? (loader) : (<div>
       <div className="movie-info-container" style={{
         ...movieStyles,
-        backgroundImage:`url(${IMG_URL}${movieDetails?.backdrop_path})`,
+        backgroundImage:`url(${IMG_URL}${movieDetails.backdrop_path})`,
       }}>
         <div className="movie-info-content">
           <div className="img-col">
             <img
-              src={`${IMG_URL}${movieDetails?.poster_path}`}
+              src={`${IMG_URL}${movieDetails.poster_path}`}
               alt={movieDetails?.title}
             />
             <p>Released: {releaseDate}</p>
@@ -69,7 +69,7 @@ const Movie = (props) => {
             <p>
               {isTruncated ? truncated : movieDetails.overview} <br />
               <span className="show-button" onClick={toggleTruncated}>
-                {movieDetails?.overview?.length > 175 && showButton}
+                {movieDetails.overview?.length > 175 && showButton}
               </span>
             </p>
             <div className="sub-info">
