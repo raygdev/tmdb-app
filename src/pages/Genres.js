@@ -26,7 +26,7 @@ const Genres = (props) => {
         setMoviesFromGenre(data.results);
         setTotalPages(data.total_pages);
         setIsLoading(false)
-      });
+      }).catch(e => console.log(e));
     window.scrollTo(0, 0);
   }, [page]);
 
