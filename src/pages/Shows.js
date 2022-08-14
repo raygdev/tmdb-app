@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ImageLinkSlider } from "../components/ImageLinkSlider";
 import { useLoading } from "../hooks/useLoading";
-import { displaySimilarTitles, setImageFirst } from "../utils/utils";
+import { displaySimilarTitles, setImageFirst, getGenres } from "../utils/utils";
 import { showStyles } from "../utils/styles";
 
 let IMG_URL = "https://image.tmdb.org/t/p/w500";
@@ -23,19 +23,13 @@ const Shows = (props) => {
       .catch((e) => console.log(e));
   }, [show_id]);
 
-  let genres = showDetails?.genres?.map((genre, i) => {
-    return (
-      <p className={`genres${i} genre`} key={genre.id}>
-        {<Link to={`/genres/${genre.id}/${genre.name}/tv`}>{genre.name}</Link>}
-      </p>
-    );
-  });
+  let genres = getGenres(showDetails.genres)
 
   const { similar, credits } = showDetails;
 
-  let similarTitle = displaySimilarTitles(similar?.results, "/shows/selected");
-  let cast = displaySimilarTitles(credits?.cast, "/people/selected");
-  const setImagesFirst = setImageFirst(credits?.crew)
+  let similarTitle = displaySimilarTitles(similar.results, "/shows/selected");
+  let cast = displaySimilarTitles(credits.cast, "/people/selected");
+  const setImagesFirst = setImageFirst(credits.crew)
   let crew = displaySimilarTitles(setImagesFirst, "/people/selected");
 
   return isLoading ? (
