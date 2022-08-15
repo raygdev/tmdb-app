@@ -4,7 +4,7 @@
 ```
 npm install
 ```
-## to run
+## To Run
 ```
 npm run dev
 ```
