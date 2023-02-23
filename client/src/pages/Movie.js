@@ -28,7 +28,7 @@ const Movie = (props) => {
       });
   }, [id]);
 
-  let genres = getGenres(movieDetails?.genres)
+  let genres = getGenres(movieDetails?.genres, "movie")
 
   const { similar, credits } = movieDetails;
 

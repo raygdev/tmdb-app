@@ -27,7 +27,7 @@ function displaySimilarTitles(titles, path, toggle) {
               />
             </Link>
             <h3 style={{ marginTop: "0", marginBottom: "0", color: "white" }}>
-              {title.name}
+              {title.name || title.title}
             </h3>
           </div>
         );
@@ -49,12 +49,12 @@ function setImageFirst(people){
   return image.concat(non_image)
 }
 
-function getGenres(genres){
+function getGenres(genres, motion_picture){
   return genres?.map((genre, i) => {
     return (
       <p className={`genres${i} genre`} key={genre.id}>
         {
-          <Link to={`/genres/${genre.id}/${genre.name}/movie`}>
+          <Link to={`/genres/${genre.id}/${genre.name}/${motion_picture}`}>
             {genre.name}
           </Link>
         }

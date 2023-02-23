@@ -23,7 +23,7 @@ const Shows = (props) => {
       .catch((e) => console.log(e));
   }, [show_id]);
 
-  let genres = getGenres(showDetails.genres)
+  let genres = getGenres(showDetails.genres, "tv")
 
   const { similar, credits } = showDetails;
 
