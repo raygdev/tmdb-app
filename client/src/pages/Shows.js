@@ -14,7 +14,7 @@ const Shows = (props) => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(`https://tmdb-api-rwj0.onrender.com/api/tvshow/${show_id}`, { method: "POST" })
+    fetch(`/api/tvshow/${show_id}`, { method: "POST" })
       .then((res) => res.json())
       .then((data) => {
         setShowDetails(data);

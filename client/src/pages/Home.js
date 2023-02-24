@@ -17,7 +17,7 @@ const Home = (props) => {
   useEffect(() => {
     let ignore = false
     setIsLoading(true)
-    fetch(`https://tmdb-api-rwj0.onrender.com/api/motionpicture?motionPicture=${motionPicture}`, {
+    fetch(`/api/motionpicture?motionPicture=${motionPicture}`, {
       method: "POST",
     })
       .then((res) => res.json())

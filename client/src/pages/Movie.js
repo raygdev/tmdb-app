@@ -19,7 +19,7 @@ const Movie = (props) => {
 
   useEffect(() => {
     setIsLoading(true)
-    fetch(`https://tmdb-api-rwj0.onrender.com/api/movie/${id}`, { method: "POST" })
+    fetch(`/api/movie/${id}`, { method: "POST" })
       .then((res) => res.json())
       .then((data) => {
         setMovieDetails(data);

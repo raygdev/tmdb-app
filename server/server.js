@@ -16,7 +16,7 @@ app.use(motionPicture.logger);
 
 app.use(motionPictureRouter)
 
-app.listen(port, "0.0.0.0", () => {
+app.listen(port, () => {
   console.log(`App is listening on port ${port}`);
 });
 
