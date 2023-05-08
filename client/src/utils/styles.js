@@ -13,6 +13,7 @@ const showStyles = {
     backgroundSize: "cover",
     color: "white",
     border: "2px solid white",
+    minHeight: "100vh"
   };
 
   export { showStyles, movieStyles }

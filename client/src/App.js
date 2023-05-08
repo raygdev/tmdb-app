@@ -1,5 +1,5 @@
 import React from "react";
-import { Header } from "./components/Header";
+import { Header } from "./components/header/Header";
 import { Routes, Route } from "react-router-dom";
 import { WatchList } from "./pages/WatchList";
 const Movie = React.lazy(() => import("./pages/Movie"));

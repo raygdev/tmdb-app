@@ -1,0 +1,13 @@
+.genre_col {
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  background-color: #00b7ff57;
+}
+
+.genres_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}

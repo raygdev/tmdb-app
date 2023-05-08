@@ -26,7 +26,7 @@ function displaySimilarTitles(titles, path, toggle) {
                 alt={title.title || title.name}
               />
             </Link>
-            <h3 style={{ marginTop: "0", marginBottom: "0", color: "white" }}>
+            <h3 style={{ marginTop: "0", marginBottom: "0" }}>
               {title.name || title.title}
             </h3>
           </div>
@@ -49,19 +49,7 @@ function setImageFirst(people){
   return image.concat(non_image)
 }
 
-function getGenres(genres, motion_picture){
-  return genres?.map((genre, i) => {
-    return (
-      <p className={`genres${i} genre`} key={genre.id}>
-        {
-          <Link to={`/genres/${genre.id}/${genre.name}/${motion_picture}`}>
-            {genre.name}
-          </Link>
-        }
-      </p>
-    );
-  });
-}
+
 
 function truncate(string){
   return string?.length > 175
@@ -69,4 +57,4 @@ function truncate(string){
   : string;
 }
 
-export { displaySimilarTitles, setImageFirst, getGenres, truncate };
+export { displaySimilarTitles, setImageFirst, truncate };

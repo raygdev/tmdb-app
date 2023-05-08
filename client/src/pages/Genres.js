@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { useLoading } from "../hooks/useLoading";
+import { useLoading } from "../hooks/useLoading/useLoading";
 
 let IMG_URL = "https://image.tmdb.org/t/p/w500";
 

@@ -1,0 +1,29 @@
+.trending_container {
+    /* background-color: #071f36c9; */
+    border-radius: 5px;
+    width: 100%;
+    padding: 1em;
+    display: flex;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    animation: fade 1s;
+  }
+  
+  @keyframes fade {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  .trending_container::-webkit-scrollbar {
+    height: 5px;
+  }
+  
+  .trending_container::-webkit-scrollbar-thumb {
+    background-color: #071f36f8;
+    border-radius: 5px;
+  }

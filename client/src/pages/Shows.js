@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
-import { ImageLinkSlider } from "../components/ImageLinkSlider";
-import { useLoading } from "../hooks/useLoading";
-import { displaySimilarTitles, setImageFirst, getGenres, truncate } from "../utils/utils";
+import { useParams } from "react-router-dom";
+import { ImageLinkSlider } from "../components/imageLinkSlider/ImageLinkSlider";
+import { ImageInfo } from "../components/imageInfo/ImageInfo";
+import { GenreDisplay } from "../components/genreDisplay/GenreDisplay";
+import { Player } from "../components/Player";
+import { useLoading } from "../hooks/useLoading/useLoading";
+import { displaySimilarTitles, setImageFirst } from "../utils/utils";
 import { showStyles } from "../utils/styles";
 
 let IMG_URL = "https://image.tmdb.org/t/p/w500";
@@ -23,40 +26,33 @@ const Shows = (props) => {
       .catch((e) => console.log(e));
   }, [show_id]);
 
-  let genres = getGenres(showDetails.genres, "tv")
 
-  const { similar, credits } = showDetails;
+  const { similar, credits, videos } = showDetails;
 
   let similarTitle = displaySimilarTitles(similar?.results, "/shows/selected");
   let cast = displaySimilarTitles(setImageFirst(credits?.cast), "/people/selected");
   let crew = displaySimilarTitles(setImageFirst(credits?.crew), "/people/selected");
-  let truncated = truncate(showDetails.overview)
+  let foundFirstTrailer = videos?.results.find(video => (video.site === "YouTube") && (video.type === "Trailer"))
 
   return isLoading ? (
     loader
   ) : (
     <div>
-      <div
-        className="movie-info-container"
-        style={{
-          ...showStyles,
-          backgroundImage: showDetails && `url(${IMG_URL}${showDetails?.backdrop_path})`,
-        }}
-      >
-        <div className="movie-info-content">
-          <div className="img-col">
-            <img src={showDetails && `${IMG_URL}${showDetails.poster_path}`} alt="" />
-          </div>
-          <div className="info-col">
-            <h2 className="title">{showDetails.name}</h2>
-            <p>{showDetails.overview}</p>
-          </div>
-        </div>
-      </div>
-      <div className="genre-col">
-        <h3>Genres:({genres?.length})</h3>
-        <div className="genres-container">{genres}</div>
-      </div>
+      <ImageInfo 
+        info={showDetails}
+        styles={showStyles}
+        imgUrl={IMG_URL}
+        releaseDate={showDetails?.first_air_date}
+      />
+      <GenreDisplay 
+        listOfGenres={showDetails.genres}
+        motion_picture={"tv"}
+      />
+      {
+        foundFirstTrailer ?
+        <Player videoKey={foundFirstTrailer?.key} /> :
+        <h2>No Trailer Availaible.</h2>
+      }
       <div className="related-titles-col">
         <ImageLinkSlider
           images={similarTitle}

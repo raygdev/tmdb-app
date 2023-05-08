@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
-import { ImageLinkSlider } from "../components/ImageLinkSlider";
+import { ImageLinkSlider } from "../components/imageLinkSlider/ImageLinkSlider";
 import { Context } from "../hooks/ContextProvider";
-import { useLoading } from "../hooks/useLoading";
+import { useLoading } from "../hooks/useLoading/useLoading";
 import { displaySimilarTitles } from "../utils/utils";
 
 
@@ -15,7 +15,6 @@ const Home = (props) => {
 
   const { toggleMotionPicture, motionPicture } = useContext(Context);
   useEffect(() => {
-    let ignore = false
     setIsLoading(true)
     fetch(`/api/motionpicture?motionPicture=${motionPicture}`, {
       method: "POST",

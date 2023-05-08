@@ -1,87 +1,69 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
-import { ImageLinkSlider } from "../components/ImageLinkSlider";
-import { useLoading } from "../hooks/useLoading";
-import { displaySimilarTitles, getGenres, truncate, setImageFirst } from "../utils/utils";
-import { movieStyles } from "../utils/styles"
+import { useParams } from "react-router-dom";
+import { ImageLinkSlider } from "../components/imageLinkSlider/ImageLinkSlider";
+import { GenreDisplay } from "../components/genreDisplay/GenreDisplay";
+import { Player } from "../components/Player";
+import { ImageInfo } from "../components/imageInfo/ImageInfo";
+import { useLoading } from "../hooks/useLoading/useLoading";
+import { displaySimilarTitles, setImageFirst } from "../utils/utils";
+import { movieStyles } from "../utils/styles";
 
 let IMG_URL = "https://image.tmdb.org/t/p/w500";
 //comments
 const Movie = (props) => {
   const [movieDetails, setMovieDetails] = useState([]);
-  const [isTruncated, setIsTruncated] = useState("");
-  const {
-    isLoading,
-    setIsLoading,
-    loader
-  } = useLoading()
+  const { isLoading, setIsLoading, loader } = useLoading();
   const { id } = useParams();
 
   useEffect(() => {
-    setIsLoading(true)
+    setIsLoading(true);
     fetch(`/api/movie/${id}`, { method: "POST" })
       .then((res) => res.json())
       .then((data) => {
         setMovieDetails(data);
-        setIsTruncated(true);
-        setIsLoading(false)
+        setIsLoading(false);
       });
   }, [id]);
 
-  let genres = getGenres(movieDetails?.genres, "movie")
-
-  const { similar, credits } = movieDetails;
-
-  const similarTitle = displaySimilarTitles(similar?.results, "/movie/selected");
-
-  const cast = displaySimilarTitles(setImageFirst(credits?.cast), "/people/selected");
-
-  const crew = displaySimilarTitles(setImageFirst(credits?.crew), "/people/selected");
-
-  const releaseDate = new Date(movieDetails.release_date).toLocaleString(
-    "en-US",
-    { year: "numeric", month: "long", day: "numeric" }
+  const { similar, credits, videos } = movieDetails;
+  const similarTitle = displaySimilarTitles(
+    similar?.results,
+    "/movie/selected"
   );
-  const truncated = truncate(movieDetails?.overview);
+  const cast = displaySimilarTitles(
+    setImageFirst(credits?.cast),
+    "/people/selected"
+  );
+  const crew = displaySimilarTitles(
+    setImageFirst(credits?.crew),
+    "/people/selected"
+  );
 
-  function toggleTruncated() {
-    setIsTruncated((prevTruncated) => !prevTruncated);
-  }
+  const foundFirstTrailer = videos?.results.find(
+    (video) => video.type === "Trailer" && video.site === "YouTube"
+  );
 
-  const showButton = isTruncated ? "Show More" : "Show Less";
+  return isLoading ? (
+    loader
+  ) : (
+    <div>
+      <ImageInfo
+        imgUrl={IMG_URL}
+        info={movieDetails}
+        styles={movieStyles}
+        releaseDate={movieDetails?.release_date}
+      />
+      <GenreDisplay
+        listOfGenres={movieDetails.genres}
+        motion_picture={"movie"}
+      />
 
-  return (
-   isLoading ? (loader) : (<div>
-      <div className="movie-info-container" style={{
-        ...movieStyles,
-        backgroundImage: movieDetails.backdrop_path && `url(${IMG_URL}${movieDetails.backdrop_path})`,
-      }}>
-        <div className="movie-info-content">
-          <div className="img-col">
-            <img
-              src={ movieDetails.poster_path && `${IMG_URL}${movieDetails.poster_path}`}
-              alt={movieDetails?.title}
-            />
-            <p>Released: {releaseDate}</p>
-          </div>
-          <div className="info-col">
-            <h2 className="title">{movieDetails.title}</h2>
-            <p>
-              {isTruncated ? truncated : movieDetails.overview} <br />
-              <span className="show-button" onClick={toggleTruncated}>
-                {movieDetails.overview?.length > 175 && showButton}
-              </span>
-            </p>
-            <div className="sub-info">
-              <p className="released">Released: {releaseDate}</p>
-              <p>Runtime: {movieDetails.runtime} minutes</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="genre-col">
-        <h3>Genres:({genres ? genres.length : null})</h3>
-        <div className="genres-container">{genres}</div>
+      <div>
+        {foundFirstTrailer ? (
+          <Player videoKey={foundFirstTrailer.key} />
+        ) : (
+          <h2>No Trailer Available.</h2>
+        )}
       </div>
       <div className="related-titles-col">
         <ImageLinkSlider
@@ -91,7 +73,7 @@ const Movie = (props) => {
         <ImageLinkSlider images={cast} name="Cast" />
         <ImageLinkSlider images={crew} name="Crew" />
       </div>
-    </div>)
+    </div>
   );
 };
 

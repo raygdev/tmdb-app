@@ -1,0 +1,56 @@
+/* HEADER */
+
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1em 0.5em;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    align-items: center;
+    background-color: #071f36f8;
+    color: white;
+  }
+  
+  .logo {
+    font-size: 1.8rem;
+    font-weight: 600;
+  }
+  .a {
+    color: inherit;
+  }
+  
+  /* NAV STYLES */
+  
+  .nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .nav .a {
+    text-decoration: none;
+    color: inherit;
+    font-weight: 600;
+    transition: transform 0.5s ease, border-bottom 0.5s ease;
+  }
+  
+  .nav .a:hover,
+  .nav .a:focus {
+    transform: scale(1.02);
+    border-bottom: 2px solid;
+  }
+
+  @media (min-width: 723px) {
+    .header {
+      flex-direction: row;
+      justify-content: space-around;
+    }
+   
+    .nav {
+      flex-direction: row;
+      flex-basis: 40%;
+      justify-content: space-around;
+    }
+  }
