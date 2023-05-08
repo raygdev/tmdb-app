@@ -8,7 +8,7 @@ export const Player = ({ videoKey }) => {
             width="100%"
             height="100%"
             style={{border: "none"}}
-            src={`http://www.youtube.com/embed/${videoKey}`}
+            src={`https://www.youtube.com/embed/${videoKey}`}
             allowFullScreen
         ></iframe>
     </div>
