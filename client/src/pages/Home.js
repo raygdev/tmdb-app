@@ -16,7 +16,7 @@ const Home = (props) => {
   const { toggleMotionPicture, motionPicture } = useContext(Context);
   useEffect(() => {
     setIsLoading(true)
-    fetch(`/api/motionpicture?motionPicture=${motionPicture}`, {
+    fetch(`https://tmdb-api-rwj0.onrender.com/api/motionpicture?motionPicture=${motionPicture}`, {
       method: "POST",
     })
       .then((res) => res.json())

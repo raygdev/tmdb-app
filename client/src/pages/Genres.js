@@ -18,7 +18,7 @@ const Genres = (props) => {
   useEffect(() => {
     setIsLoading(true)
     fetch(
-      `/api/genres/?with_genres=${genre_id}&page=${page}&motion_picture=${motion_picture}`,
+      `https://tmdb-api-rwj0.onrender.com/api/genres/?with_genres=${genre_id}&page=${page}&motion_picture=${motion_picture}`,
       { method: "POST" }
     )
       .then((res) => res.json())
