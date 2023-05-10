@@ -2,7 +2,7 @@
   padding: 1em;
   display: flex;
   flex-direction: column;
-  background-color: #00b7ff57;
+  margin-bottom: 1em;
 }
 
 .genres_container {

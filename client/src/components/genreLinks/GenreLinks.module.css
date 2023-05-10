@@ -1,0 +1,19 @@
+.genre {
+    display: block;
+    background-color: #071f36f8;
+    padding: 0.75em 2.25em;
+    color: white;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: all .2s ease;
+  }
+
+  .genre:hover,
+  .genre:focus {
+    box-shadow: 3px 3px 12px 3px rgba(0, 0, 0, 0.699);
+  }
+
+  .genre:active {
+    box-shadow: 1px 2px 12px 1px rgba(0, 0, 0, 0.699);
+  }

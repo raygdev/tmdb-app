@@ -1,5 +1,5 @@
 const showStyles = {
-    backgroundColor: "rgba(0,0,0,0.6)",
+    backgroundColor: "rgba(0,0,0,0.7)",
     backgroundBlendMode: "multiply",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
@@ -7,13 +7,7 @@ const showStyles = {
   };
 
   const movieStyles = {
-    backgroundColor: "rgba(0,0,0,0.8)",
-    backgroundBlendMode: "multiply",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    color: "white",
-    border: "2px solid white",
-    minHeight: "100vh"
+   ...showStyles
   };
 
   export { showStyles, movieStyles }

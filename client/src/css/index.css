@@ -79,21 +79,13 @@ img {
   border: 1px solid #071f36f8;
 }
 
-.genre a {
-  display: block;
-  background-color: #071f36f8;
-  padding: 0.75em 2.25em;
-  color: white;
-  text-transform: uppercase;
-  text-decoration: none;
-}
+
 
 
 .related-titles-col {
   padding: 1em;
   display: flex;
   flex-direction: column;
-  background-color: #00b7ff57;
 }
 
 .buttons-container {
