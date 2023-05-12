@@ -54,7 +54,6 @@ p {
 
 img {
   width: 100px;
-  height: calc(100px * 0.666%);
   border-radius: 5px;
 }
 
@@ -68,6 +67,7 @@ img {
 }
 .movie-container a img {
   border-radius: 5px;
+  height: 150px;
 }
 
 .movie-container0 {
