@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ImageLinkSlider } from "../components/imageLinkSlider/ImageLinkSlider";
 import { GenreDisplay } from "../components/genreDisplay/GenreDisplay";
-import { Player } from "../components/Player";
+import { Player } from "../components/player/Player";
 import { ImageInfo } from "../components/imageInfo/ImageInfo";
 import { useLoading } from "../hooks/useLoading/useLoading";
 import { displaySimilarTitles, setImageFirst } from "../utils/utils";

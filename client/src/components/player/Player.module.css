@@ -1,0 +1,12 @@
+.container {
+   width: 100vw;
+   height: 75vh;
+   margin: 0 auto
+}
+
+@media (min-width:723px) {
+    .container {
+        height: 75vh;
+        width: 75vw;
+    }
+}

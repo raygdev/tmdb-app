@@ -1,9 +1,10 @@
 import React from 'react'
+import styles from "./Player.module.css"
 
 export const Player = ({ videoKey }) => {
  
   return (
-    <div style={{height: "75vh", width: "75vw", margin: "0 auto"}}>
+    <div className={styles.container}>
         <iframe 
             width="100%"
             height="100%"

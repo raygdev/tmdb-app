@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { ImageLinkSlider } from "../components/imageLinkSlider/ImageLinkSlider";
 import { ImageInfo } from "../components/imageInfo/ImageInfo";
 import { GenreDisplay } from "../components/genreDisplay/GenreDisplay";
-import { Player } from "../components/Player";
+import { Player } from "../components/player/Player";
 import { useLoading } from "../hooks/useLoading/useLoading";
 import { displaySimilarTitles, setImageFirst } from "../utils/utils";
 import { showStyles } from "../utils/styles";
