@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import React from "react";
 
 const imageSource = "https://image.tmdb.org/t/p/w200";
+const noPhotoUrl ="https://images.freeimages.com/clg/images/41/413691/none-icon-available-no-unavailable_f.jpg"
 
 function displaySimilarTitles(titles, path, toggle) {
   let hash = {};
@@ -21,7 +22,7 @@ function displaySimilarTitles(titles, path, toggle) {
                     ? `${imageSource}${title.poster_path}`
                     : title.profile_path
                     ? `${imageSource}${title.profile_path}`
-                    : "https://st3.depositphotos.com/6672868/13701/v/600/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
+                    : noPhotoUrl
                 }
                 alt={title.title || title.name}
               />
