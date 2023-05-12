@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useLoading } from "../hooks/useLoading/useLoading";
+import { API_URL } from "../utils/apiUrl";
 
 let IMG_URL = "https://image.tmdb.org/t/p/w500";
 
@@ -18,8 +19,7 @@ const Genres = (props) => {
   useEffect(() => {
     setIsLoading(true)
     fetch(
-      `https://tmdb-api-rwj0.onrender.com/api/genres/?with_genres=${genre_id}&page=${page}&motion_picture=${motion_picture}`,
-      { method: "POST" }
+      `${API_URL}/api/genres/?with_genres=${genre_id}&page=${page}&motion_picture=${motion_picture}`
     )
       .then((res) => res.json())
       .then((data) => {

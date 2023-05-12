@@ -7,6 +7,7 @@ import { ImageInfo } from "../components/imageInfo/ImageInfo";
 import { useLoading } from "../hooks/useLoading/useLoading";
 import { displaySimilarTitles, setImageFirst } from "../utils/utils";
 import { movieStyles } from "../utils/styles";
+import { API_URL } from "../utils/apiUrl";
 
 let IMG_URL = "https://image.tmdb.org/t/p/w500";
 //comments
@@ -17,7 +18,7 @@ const Movie = (props) => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(`https://tmdb-api-rwj0.onrender.com/api/movie/${id}`, { method: "POST" })
+    fetch(`${API_URL}/api/movie/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setMovieDetails(data);

@@ -7,6 +7,7 @@ import { Player } from "../components/Player";
 import { useLoading } from "../hooks/useLoading/useLoading";
 import { displaySimilarTitles, setImageFirst } from "../utils/utils";
 import { showStyles } from "../utils/styles";
+import { API_URL } from "../utils/apiUrl";
 
 let IMG_URL = "https://image.tmdb.org/t/p/w500";
 
@@ -17,7 +18,7 @@ const Shows = (props) => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(`https://tmdb-api-rwj0.onrender.com/api/tvshow/${show_id}`, { method: "POST" })
+    fetch(`${API_URL}/api/tvshow/${show_id}`)
       .then((res) => res.json())
       .then((data) => {
         setShowDetails(data);

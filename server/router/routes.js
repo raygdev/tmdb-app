@@ -3,11 +3,11 @@ const motionPicture = require("../controllers/controllers")
 
 const router = express.Router()
 
-router.post("/api/movie/:id", motionPicture.getMovieInfo);
+router.get("/api/movie/:id", motionPicture.getMovieInfo);
 
-router.post("/api/motionpicture", motionPicture.getMotionPicture);
+router.get("/api/motionpicture", motionPicture.getMotionPicture);
 
-router.post("/api/tvshow/:show_id", motionPicture.getShowInfo);
-router.post("/api/genres/", motionPicture.getTitlesWithGenre);
+router.get("/api/tvshow/:show_id", motionPicture.getShowInfo);
+router.get("/api/genres/", motionPicture.getTitlesWithGenre);
 
 module.exports = router

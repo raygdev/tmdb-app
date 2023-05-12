@@ -3,6 +3,7 @@ import { ImageLinkSlider } from "../components/imageLinkSlider/ImageLinkSlider";
 import { Context } from "../hooks/ContextProvider";
 import { useLoading } from "../hooks/useLoading/useLoading";
 import { displaySimilarTitles } from "../utils/utils";
+import { API_URL } from "../utils/apiUrl";
 
 
 const Home = (props) => {
@@ -16,9 +17,7 @@ const Home = (props) => {
   const { toggleMotionPicture, motionPicture } = useContext(Context);
   useEffect(() => {
     setIsLoading(true)
-    fetch(`https://tmdb-api-rwj0.onrender.com/api/motionpicture?motionPicture=${motionPicture}`, {
-      method: "POST",
-    })
+    fetch(`${API_URL}/api/motionpicture?motionPicture=${motionPicture}`)
       .then((res) => res.json())
       .then((data) => {
           setMovies( data.results);
