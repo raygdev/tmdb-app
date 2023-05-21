@@ -23,6 +23,8 @@ const Shows = (props) => {
       .then((data) => {
         setShowDetails(data);
         setIsLoading(false);
+        document.title = data.name
+        document.querySelector("meta[name='description']").setAttribute("content", `${data.name} - ${data.overview}`)
       })
       .catch((e) => console.log(e));
   }, [show_id]);

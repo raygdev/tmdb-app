@@ -23,6 +23,8 @@ const Movie = (props) => {
       .then((data) => {
         setMovieDetails(data);
         setIsLoading(false);
+        document.title =  data.title
+        document.querySelector("meta[name='description']").setAttribute("content", `${data.title} - ${data.overview}`)
       });
   }, [id]);
 
