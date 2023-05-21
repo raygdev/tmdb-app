@@ -61,6 +61,8 @@ img {
   object-fit: contain;
   margin-right: 1em;
   margin-top: 0.5em;
+  transition: all .5s ease-in-out;
+  color: #313131
 }
 .movie-container h3 {
   font-size: calc(16px / 1.5);
@@ -68,6 +70,10 @@ img {
 .movie-container a img {
   border-radius: 5px;
   height: 150px;
+}
+
+.movie-container a {
+  display: block;
 }
 
 .movie-container0 {
@@ -114,4 +120,18 @@ img {
 
 .genre-links-container {
   flex-basis: 200px;
+}
+
+.toggle_btn_container {
+  display: flex;
+  width: 250px;
+  justify-content: space-around;
+  align-content: center;
+}
+
+.home_container {
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
