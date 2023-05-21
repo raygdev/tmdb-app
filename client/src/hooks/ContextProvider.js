@@ -5,17 +5,18 @@ const Context = createContext();
 const ContextProvider = ({ children }) => {
   const [motionPicture, setMotionPicture] = useState("movie");
 
-  function toggleMotionPicture() {
-    setMotionPicture((prevMotionPicture) =>
-      prevMotionPicture === "movie" ? "tv" : "movie"
-    );
+  function selectMotionPicture(selectedMotionPicture) {
+    if(selectedMotionPicture === motionPicture) {
+      return
+    }
+    setMotionPicture(selectedMotionPicture)
   }
 
   return (
     <Context.Provider
       value={{
         motionPicture,
-        toggleMotionPicture,
+        selectMotionPicture,
       }}
     >
       {children}
