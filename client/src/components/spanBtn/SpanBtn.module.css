@@ -1,0 +1,21 @@
+.toggle_button {
+    background-color: #071f36f8;
+    padding: .25em 1.5em;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all .4s ease-in-out
+  }
+  
+  .toggle_button:hover,
+  .toggle_button:focus {
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.9);
+  }
+  
+  .toggle_button:active {
+    box-shadow: 1px, 1px 9px rgba(0, 0, 0, 0.9);
+  }
+  
+  .toggle_button.active {
+    background-color:#0374dff8;
+  }
