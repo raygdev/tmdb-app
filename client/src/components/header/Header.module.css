@@ -11,6 +11,7 @@
     align-items: center;
     background-color: #071f36f8;
     color: white;
+    z-index: 1;
   }
   
   .logo {
