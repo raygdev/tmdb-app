@@ -62,10 +62,12 @@ img {
   margin-right: 1em;
   margin-top: 0.5em;
   transition: all .5s ease-in-out;
-  color: #313131
+  color: #313131;
+  position: relative;
 }
 .movie-container h3 {
   font-size: calc(16px / 1.5);
+  z-index: 0;
 }
 .movie-container a img {
   border-radius: 5px;
@@ -74,6 +76,7 @@ img {
 
 .movie-container a {
   display: block;
+  z-index: 1;
 }
 
 .movie-container0 {
@@ -136,9 +139,38 @@ img {
   justify-content: center;
 }
 
+/* Truncate Title */
+
 .name-truncate {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   width: 100px;
 }
+
+/* Tool tip animation */
+.name-truncate::before {
+  content:"";
+  position: absolute;
+  white-space:normal;
+  text-overflow: unset;
+  bottom:0;
+  left: 0;
+  width: 100px;
+  transform: translateY(0);
+  z-index: 1;
+  color: white;
+  border-radius: 3px;
+  padding: .5em;
+  opacity: 0;
+  transition: 
+        opacity ease-in-out 350ms,
+        transform ease-in-out 350ms
+}
+
+.name-truncate:hover::before {
+  content: attr(data-tool-tip);
+  opacity: 1;
+  transform: translateY(-19px);
+  background-color:rgba(0, 0, 0, 0.75);
+} 

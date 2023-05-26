@@ -27,7 +27,7 @@ function displaySimilarTitles(titles, path, toggle) {
                 alt={title.title || title.name}
               />
             </Link>
-            <h3 className="name-truncate" style={{ marginTop: "0", marginBottom: "0" }}>
+            <h3 data-tool-tip={`${title.title || title.name}`} className="name-truncate" style={{ marginTop: "0", marginBottom: "0" }}>
               {title.name || title.title}
             </h3>
           </div>
