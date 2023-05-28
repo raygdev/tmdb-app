@@ -40,12 +40,12 @@ const Genres = (props) => {
         <div key={movie.id} className="genre-links-container">
           <Link to={`/${pageURL}/selected/${movie.id}`}>
             <figure>
-              <img src={url} alt={movie.title} />
+              <img src={url} alt={movie.title || movie.name} />
               <figcaption 
-                data-tool-tip={movie.title}
+                data-tool-tip={movie.title || movie.name}
                 className="name-truncate"
               >
-                {movie.title}
+                {movie.title || movie.name}
               </figcaption>
             </figure>
           </Link>
