@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useLoading } from "../hooks/useLoading/useLoading";
 import { API_URL } from "../utils/apiUrl";
+import { noPhotoUrl, imageSource } from "../utils/utils";
 
 let IMG_URL = "https://image.tmdb.org/t/p/w500";
 
@@ -33,13 +34,24 @@ const Genres = (props) => {
   let pageURL = motion_picture === "tv" ? "shows" : "movie";
 
   const moviesFromGenreList = moviesFromGenre
-    ? moviesFromGenre.map((movie) => (
+    ? moviesFromGenre.map((movie) => {
+      let url = movie.poster_path ? (imageSource + movie.poster_path) : noPhotoUrl
+      return (
         <div key={movie.id} className="genre-links-container">
           <Link to={`/${pageURL}/selected/${movie.id}`}>
-            <img src={`${IMG_URL}${movie.poster_path}`} alt={movie.title} />
+            <figure>
+              <img src={url} alt={movie.title} />
+              <figcaption 
+                data-tool-tip={movie.title}
+                className="name-truncate"
+              >
+                {movie.title}
+              </figcaption>
+            </figure>
           </Link>
         </div>
-      ))
+      )
+       })
     : null;
 
   function prevPage() {

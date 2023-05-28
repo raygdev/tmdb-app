@@ -52,24 +52,36 @@ p {
   margin-bottom: 0;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+figure,
+figcaption {
+  margin: 0;
+}
+
+figcaption {
+  font-weight: bold;
+}
+
 .movie-container {
   object-fit: contain;
   transition: all .5s ease-in-out;
   color: #313131;
   position: relative;
+  width: 200px;
 }
 
-.movie-container a img {
+.movie-container a img,
+.genre-links-container img {
   display: block;
   border-radius: 5px;
-  width: 100px;
-  height: 150px;
+  width:200px;
+  height: 300px;
 }
 
-.movie-container a {
-  display: block;
-  z-index: 1;
-}
 
 .movie-container img:hover,
 .movie-container img:focus {
@@ -84,26 +96,38 @@ p {
 
 .buttons-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 2em;
+  padding: 1em;
 }
 
 /* GENRE PAGE */
 
 .genre-page-container {
   padding: 1em;
-  background-color: #00b7ff57;
 }
 
 .genre-links-container {
-  padding: 2em;
   width: 50%;
-  margin: 0 auto;
+  position: relative;
 }
+
 .genre-movies {
   display: flex;
   flex-wrap: wrap;
   max-width: 1000px;
-  margin: 0 auto;;
+  margin: 0 auto;
+  gap: 2em;
+  justify-content: center;
+}
+
+.genre-links-container figure,
+.movie-container figure {
+  width: 200px;
+}
+
+.genre-links-container img {
+  display: block;
 }
 
 .genre-links-container {
@@ -130,9 +154,9 @@ p {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 100px;
+  width: 100%;
   font-size: .875rem;
-  margin: 0.25rem 0;
+  margin: 0;
 }
 
 /* Tool tip animation */
@@ -143,7 +167,7 @@ p {
   bottom:0;
   width: 100%;
   transform: translateY(0);
-  z-index: 1;
+  z-index: 0;
   color: white;
   border-radius: 3px;
   padding: .5em 0;
@@ -157,6 +181,6 @@ p {
 .name-truncate:hover::before {
   content: attr(data-tool-tip);
   opacity: 1;
-  transform: translateY(-1.625rem);
+  transform: translateY(-1.2rem);
   background-color:rgba(0, 0, 0, 0.75);
 } 
