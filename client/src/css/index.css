@@ -52,25 +52,17 @@ p {
   margin-bottom: 0;
 }
 
-img {
-  width: 100px;
-  border-radius: 5px;
-}
-
 .movie-container {
   object-fit: contain;
-  margin-right: 1em;
-  margin-top: 0.5em;
   transition: all .5s ease-in-out;
   color: #313131;
   position: relative;
 }
-.movie-container h3 {
-  font-size: calc(16px / 1.5);
-  z-index: 0;
-}
+
 .movie-container a img {
+  display: block;
   border-radius: 5px;
+  width: 100px;
   height: 150px;
 }
 
@@ -79,17 +71,10 @@ img {
   z-index: 1;
 }
 
-.movie-container0 {
-  margin-left: 1em;
-}
-
 .movie-container img:hover,
 .movie-container img:focus {
   border: 1px solid #071f36f8;
 }
-
-
-
 
 .related-titles-col {
   padding: 1em;
@@ -146,6 +131,8 @@ img {
   overflow: hidden;
   text-overflow: ellipsis;
   width: 100px;
+  font-size: .875rem;
+  margin: 0.25rem 0;
 }
 
 /* Tool tip animation */
@@ -153,15 +140,14 @@ img {
   content:"";
   position: absolute;
   white-space:normal;
-  text-overflow: unset;
   bottom:0;
-  left: 0;
-  width: 100px;
+  width: 100%;
   transform: translateY(0);
   z-index: 1;
   color: white;
   border-radius: 3px;
-  padding: .5em;
+  padding: .5em 0;
+  text-align: center;
   opacity: 0;
   transition: 
         opacity ease-in-out 350ms,
@@ -171,6 +157,6 @@ img {
 .name-truncate:hover::before {
   content: attr(data-tool-tip);
   opacity: 1;
-  transform: translateY(-19px);
+  transform: translateY(-1.625rem);
   background-color:rgba(0, 0, 0, 0.75);
 } 
