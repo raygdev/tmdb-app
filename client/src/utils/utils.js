@@ -22,18 +22,20 @@ function displaySimilarTitles(titles, path) {
         return (
           <div className={`movie-container`} key={title.id}>
             <Link to={`${path}/${title.id}`}>
-              <img
-                loading="lazy"
-                src={imagePath}
-                alt={title.title || title.name}
-              />
+              <figure>
+                <img
+                  loading="lazy"
+                  src={imagePath}
+                  alt={title.title || title.name}
+                />
+                <figcaption
+                  data-tool-tip={`${title.title || title.name}`}
+                  className="name-truncate"
+                >
+                  {title.name || title.title}
+                </figcaption>
+              </figure>
             </Link>
-            <h3
-              data-tool-tip={`${title.title || title.name}`}
-              className="name-truncate"
-            >
-              {title.name || title.title}
-            </h3>
           </div>
         )
       }
@@ -60,4 +62,4 @@ function truncate(string) {
     : string
 }
 
-export { displaySimilarTitles, setImageFirst, truncate }
+export { displaySimilarTitles, setImageFirst, truncate, noPhotoUrl, imageSource }
