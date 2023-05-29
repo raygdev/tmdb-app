@@ -30,11 +30,12 @@ const Shows = (props) => {
   }, [show_id]);
 
 
-  const { similar, credits, videos } = showDetails;
+  const { similar, credits, videos, recommendations } = showDetails;
 
   let similarTitle = displaySimilarTitles(similar?.results, "/shows/selected");
   let cast = displaySimilarTitles(setImageFirst(credits?.cast), "/people/selected");
   let crew = displaySimilarTitles(setImageFirst(credits?.crew), "/people/selected");
+  let recommended = displaySimilarTitles(recommendations?.results, "/shows/selected")
   let foundFirstTrailer = videos?.results.find(video => (video.site === "YouTube") && (video.type === "Trailer"))
 
   return isLoading ? (
@@ -57,11 +58,9 @@ const Shows = (props) => {
         <h2>No Trailer Availaible.</h2>
       }
       <div className="related-titles-col">
-        <ImageLinkSlider
-          images={similarTitle}
-          name={`Titles Related to ${showDetails.name}`}
-        />
-        <ImageLinkSlider images={cast} name="Cast" />
+        {recommended?.[0] && <ImageLinkSlider images={recommended} name={"Recommended"}/>}
+        {similarTitle?.[0] && <ImageLinkSlider images={similarTitle} name={`Titles Related to ${showDetails.name}`}/>}
+        {cast?.[0] && <ImageLinkSlider images={cast} name="Cast" />}
         {crew?.[0] && <ImageLinkSlider images={crew} name="Crew" />}
       </div>
     </div>

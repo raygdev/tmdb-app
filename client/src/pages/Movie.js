@@ -28,7 +28,7 @@ const Movie = (props) => {
       });
   }, [id]);
 
-  const { similar, credits, videos } = movieDetails;
+  const { similar, credits, videos, recommendations } = movieDetails;
   const similarTitle = displaySimilarTitles(
     similar?.results,
     "/movie/selected"
@@ -41,6 +41,10 @@ const Movie = (props) => {
     setImageFirst(credits?.crew),
     "/people/selected"
   );
+  const recommended = displaySimilarTitles(
+    recommendations?.results,
+    "/movie/selected"
+  )
 
   const foundFirstTrailer = videos?.results.find(
     (video) => video.type === "Trailer" && video.site === "YouTube"
@@ -69,12 +73,10 @@ const Movie = (props) => {
         )}
       </div>
       <div className="related-titles-col">
-        <ImageLinkSlider
-          images={similarTitle}
-          name={`Titles Related to ${movieDetails.title}`}
-        />
-        <ImageLinkSlider images={cast} name="Cast" />
-        <ImageLinkSlider images={crew} name="Crew" />
+        {recommended?.[0] && <ImageLinkSlider images={recommended} name={"Recommended"} />}
+        {similarTitle?.[0] && <ImageLinkSlider images={similarTitle} name={`Titles Related to ${movieDetails.title}`}/>}
+        {cast?.[0] && <ImageLinkSlider images={cast} name="Cast" />}
+        {crew?.[0] && <ImageLinkSlider images={crew} name="Crew" />}
       </div>
     </div>
   );

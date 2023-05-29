@@ -19,7 +19,7 @@ exports.getMotionPicture = (req, res) => {
   exports.getShowInfo = (req, res) => {
     const { show_id } = req.params;
     getMotionPictureData(
-      `https://api.themoviedb.org/3/tv/${show_id}?api_key=${key}&append_to_response=videos,similar,credits`,
+      `https://api.themoviedb.org/3/tv/${show_id}?api_key=${key}&append_to_response=recommendations,videos,similar,credits`,
       res
     ).catch((e) => console.log(e));
   }
@@ -27,7 +27,7 @@ exports.getMotionPicture = (req, res) => {
 exports.getMovieInfo = (req, res) => {
     const { id } = req.params;
     getMotionPictureData(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=${key}&append_to_response=videos,similar,credits`,
+      `https://api.themoviedb.org/3/movie/${id}?api_key=${key}&include_adult=false&append_to_response=recommendations,videos,similar,credits`,
       res
     ).catch((e) => console.log(e));
   }
@@ -35,7 +35,7 @@ exports.getMovieInfo = (req, res) => {
   exports.getTitlesWithGenre = (req, res) => {
     let { with_genres, page, motion_picture } = req.query;
     getMotionPictureData(
-      `https://api.themoviedb.org/3/discover/${motion_picture}?api_key=${key}&with_genres=${with_genres}&page=${page}&list`,
+      `https://api.themoviedb.org/3/discover/${motion_picture}?api_key=${key}&include_adult=false&with_genres=${with_genres}&page=${page}&list`,
       res
     ).catch((e) => console.log(e));
   }
