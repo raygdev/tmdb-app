@@ -6,6 +6,7 @@ const Movie = React.lazy(() => import("./pages/Movie"));
 const Home = React.lazy(() => import("./pages/Home"));
 const Genres = React.lazy(() => import("./pages/Genres"));
 const Shows = React.lazy(() => import("./pages/Shows"));
+const People = React.lazy(() => import("./pages/People"))
 function App(props) {
   return (
     <div className="App">
@@ -20,6 +21,7 @@ function App(props) {
             element={<Genres />}
           />
           <Route path="/shows/selected/:show_id" element={<Shows />} />
+          <Route path="people/selected/:personId" element={<People />} />
         </Routes>
       </React.Suspense>
     </div>
