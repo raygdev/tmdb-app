@@ -40,6 +40,12 @@ exports.getMovieInfo = (req, res) => {
     ).catch((e) => console.log(e));
   }
 
+  exports.getPersonById = (req,res) => {
+    let personId = req.params.id
+    getMotionPictureData(`https://api.themoviedb.org/3/person/${personId}?api_key=${key}&append_to_response=movie_credits`, res)
+      .catch(e => console.log(e))
+  }
+
 
   async function getMotionPictureData(url, res) {
     const response = await fetch(url);
