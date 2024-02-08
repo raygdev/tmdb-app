@@ -5,7 +5,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "child-src 'self' https://raygdev.github.com/portfolio-site; frame-ancestors 'self' https://raygdev.github.com/portfolio-site;"
+          "value": "child-src 'self' https://raygdev.github.com/portfolio-site/; frame-ancestors 'self' https://raygdev.github.com/portfolio-site/;"
         }
       ]
     }
