@@ -5,11 +5,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "child-src 'self'"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "SAMEORIGIN"
+          "value": "child-src 'self'; frame-ancestors 'self'"
         }
       ]
     }
