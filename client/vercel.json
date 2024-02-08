@@ -1,13 +1,17 @@
 {
-    "source": "/(.*)",
-    "headers": [
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
         {
-        "key":"Content-Security-Policy",
-        "value": "child-src 'self'"
+          "key": "Content-Security-Policy",
+          "value": "child-src 'self'"
         },
         {
-            "key":"X-Frame-Options",
-            "value": "SAMEORIGIN"
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
         }
-    ]
+      ]
+    }
+  ]
 }
