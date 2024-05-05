@@ -1,32 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { ImageLinkSlider } from "../components/imageLinkSlider/ImageLinkSlider";
 import { GenreDisplay } from "../components/genreDisplay/GenreDisplay";
 import { Player } from "../components/player/Player";
 import { ImageInfo } from "../components/imageInfo/ImageInfo";
-import { useLoading } from "../hooks/useLoading/useLoading";
 import { displaySimilarTitles, setImageFirst } from "../utils/utils";
 import { movieStyles } from "../utils/styles";
-import { API_URL } from "../utils/apiUrl";
+import { useMovie } from "../hooks/useMovie";
 
 let IMG_URL = "https://image.tmdb.org/t/p/w500";
 //comments
 const Movie = (props) => {
-  const [movieDetails, setMovieDetails] = useState([]);
-  const { isLoading, setIsLoading, loader } = useLoading();
-  const { id } = useParams();
-
-  useEffect(() => {
-    setIsLoading(true);
-    fetch(`${API_URL}/api/movie/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setMovieDetails(data);
-        setIsLoading(false);
-        document.title =  data.title
-        document.querySelector("meta[name='description']").setAttribute("content", `${data.title} - ${data.overview}`)
-      });
-  }, [id]);
+  const { movieDetails, loader, isLoading } = useMovie()
 
   const { similar, credits, videos, recommendations } = movieDetails;
   const similarTitle = displaySimilarTitles(
