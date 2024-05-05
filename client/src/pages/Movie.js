@@ -33,9 +33,9 @@ const Movie = (props) => {
     (video) => video.type === "Trailer" && video.site === "YouTube"
   );
 
-  return isLoading ? (
-    loader
-  ) : (
+  if(isLoading) return loader
+
+  return (
     <div>
       <ImageInfo
         imgUrl={IMG_URL}
