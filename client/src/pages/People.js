@@ -1,25 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
-import { useLoading } from '../hooks/useLoading/useLoading'
-import { API_URL } from '../utils/apiUrl'
+import { Link } from 'react-router-dom'
 import { imageSource, noPhotoUrl } from '../utils/utils'
+import { usePeople } from '../hooks/usePeople'
 
 
 
 const People = () => {
-  const [person, setPerson] = useState('')
-  const { isLoading, setIsLoading, loader } = useLoading()
-  const { personId } = useParams()
-
-  useEffect(() => {
-    setIsLoading(true)
-    fetch(`${API_URL}/api/people/${personId}`)
-        .then(res => res.json())
-        .then(data => setPerson(data))
-        .catch(e => console.log(e))
-        .finally(() => setIsLoading(false))
-    window.scrollTo(0,0)
-  }, [personId])
+  const{ person, loader, isLoading } = usePeople()
 
   let castJobs = person?.movie_credits?.cast.map(titles => {
     const { character, title, poster_path, id } = titles
