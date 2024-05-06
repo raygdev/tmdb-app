@@ -25,6 +25,7 @@ export function useGenres() {
         })
         .catch(e => console.log(e))
         .finally(() => setIsLoading(false))
+      document.title = genre_name
       window.scrollTo(0, 0);
     }, [page]);
 
