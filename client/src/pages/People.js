@@ -1,42 +1,27 @@
-import { Link } from 'react-router-dom'
 import { imageSource, noPhotoUrl } from '../utils/utils'
 import { usePeople } from '../hooks/usePeople'
+import CastJobs from '../components/CastJobs'
+import CrewJobs from '../components/CrewJobs'
 
 
 
 const People = () => {
   const{ person, loader, isLoading } = usePeople()
 
-  let castJobs = person?.movie_credits?.cast.map(titles => {
+  if(isLoading) return loader
+
+  let castJobs = person.movie_credits?.cast.map(titles => {
     const { character, title, poster_path, id } = titles
-    return (
-        <figure key={id} style={{display:"flex", width:"100%", gap:"2em"}}>
-            <img style={{height: "300px", width: "200px"}} src={poster_path ? imageSource + poster_path : noPhotoUrl} alt={title}/>
-            <div>
-                <Link to={`/movie/selected/${id}`}>
-                    <figcaption style={{color: "#1755a6"}} >{title}</figcaption>
-                </Link>
-                {character && <figcaption style={{color: "#767676"}}>{`as ${character}`}</figcaption>}
-            </div>
-        </figure>
-    )
+    return <CastJobs key={id} character={character} title={title} poster_path={poster_path} id={id} />
   })
-  let crewJobs = person?.movie_credits?.crew.map((titles, i) => {
+
+  let crewJobs = person.movie_credits?.crew.map((titles, i) => {
     const { job, title, poster_path, id } = titles
-    return (
-        <figure key={i} style={{display:"flex", width: "100%", gap: "2em"}}>
-            <img style={{height: "300px", width: "200px"}} src={poster_path ? imageSource + poster_path : noPhotoUrl} alt={title}/>
-            <div>
-                <Link to={`/movie/selected/${id}`}>
-                    <figcaption style={{color: "#1755a6"}}>{title}</figcaption>
-                </Link>
-                {job && <figcaption style={{color: "#767676"}}>{`job ${job}`}</figcaption>}
-            </div>
-        </figure>
-    )
+    return <CrewJobs key={i} job={job} title={title} poster_path={poster_path} id={id} />
   })
-  return isLoading ? (loader) :
-         (<div>
+
+  return (
+        <div>
             <div className='person_container'>
                 <figure>
                     <img src={person?.profile_path ? imageSource + person.profile_path : noPhotoUrl} alt="" />
@@ -54,8 +39,7 @@ const People = () => {
                 {castJobs}
                 {crewJobs}
             </div>
-         </div>)
-        
-    
+        </div>
+    )
 }
 export default People
