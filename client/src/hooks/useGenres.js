@@ -1,33 +1,39 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { API_URL } from "../utils/apiUrl";
 import { useLoading } from "./useLoading/useLoading";
+import { getMotionPicturesFromGenre } from "../services/motionPictureService";
 
 export function useGenres() {
-    const [moviesFromGenre, setMoviesFromGenre] = useState("");
-    const [page, setPage] = useState(1);
-    const [totalPages, setTotalPages] = useState("");
-    const {
-      isLoading,
-      setIsLoading,
-      loader
-    } = useLoading(true)
-    const { genre_id, genre_name, motion_picture } = useParams();
-  
-    useEffect(() => {
-      fetch(
-        `${API_URL}/api/genres/?with_genres=${genre_id}&page=${page}&motion_picture=${motion_picture}`
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          setMoviesFromGenre(data.results);
-          setTotalPages(data.total_pages);
-        })
-        .catch(e => console.log(e))
-        .finally(() => setIsLoading(false))
-      document.title = genre_name
-      window.scrollTo(0, 0);
-    }, [page]);
+  const [moviesFromGenre, setMoviesFromGenre] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState("");
+  const { isLoading, setIsLoading, loader } = useLoading(true);
+  const params = useParams();
+  useEffect(() => {
+    if (!isLoading) setIsLoading(true);
+    const controller = new AbortController();
+    const signal = controller.signal;
+    getMotionPicturesFromGenre({ ...params, page: page }, signal)
+      .then((data) => {
+        setMoviesFromGenre(data.results);
+        setTotalPages(data.total_pages);
+      })
+      .catch((e) => console.log(e))
+      .finally(() => setIsLoading(false));
+    document.title = params.genre_name;
+    window.scrollTo(0, 0);
+    return () => controller.abort("page change");
+  }, [page]);
 
-    return { moviesFromGenre, page, totalPages, genre_name, motion_picture, loader, isLoading, setIsLoading, setPage}
+  return {
+    moviesFromGenre,
+    page,
+    totalPages,
+    genre_name: params.genre_name,
+    motion_picture: params.motion_picture,
+    loader,
+    isLoading,
+    setIsLoading,
+    setPage,
+  };
 }
