@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 import { useLoading } from './useLoading/useLoading';
 import { Context } from './ContextProvider';
-import { API_URL } from '../utils/apiUrl';
+import { getMotionPictures } from '../services/motionPictureService';
 
 export function useBaseMotionPicture() {
   const [movies, setMovies] = useState([]);
@@ -9,21 +9,27 @@ export function useBaseMotionPicture() {
     isLoading,
     setIsLoading,
     loader
-  } = useLoading()
+  } = useLoading(true)
 
   const { selectMotionPicture, motionPicture } = useContext(Context);
   document.title = "Home"
- 
+ console.log(isLoading)
   useEffect(() => {
-    setIsLoading(true)
-    fetch(`${API_URL}/api/motionpicture?motionPicture=${motionPicture}`)
-      .then((res) => res.json())
-      .then((data) => {
-          setMovies( data.results);
-          setIsLoading(false)
-          document.querySelector("meta[name='description']").setAttribute("content", "Search movies and tv shows and create a watchlist for shows to watch")  
-      })
-      .catch((e) => console.log(e));
+    if(!isLoading) setIsLoading(true)
+
+    const controller = new AbortController()
+    const signal = controller.signal
+    getMotionPictures(motionPicture, signal)
+    .then((data) => {
+        setMovies(data);
+        document
+          .querySelector("meta[name='description']")
+          .setAttribute("content", "Search movies and tv shows and create a watchlist for shows to watch") 
+    })
+    .catch((e) => console.log(e))
+    .finally(() => setIsLoading(false))
+
+    return () => controller.abort("getMotion picture aborted")
       
   }, [motionPicture]);
 
