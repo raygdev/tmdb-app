@@ -13,8 +13,6 @@ const Home = (props) => {
     motionPicture,
     selectMotionPicture 
   } = useBaseMotionPicture()
-  
-  document.title = "Home"
 
   const isSelected = motionPicture === "movie"
   const motionPicturePath = motionPicture === "movie" ? "movie" : "shows";
