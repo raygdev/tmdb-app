@@ -1,40 +1,25 @@
-import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
-import { useLoading } from "../hooks/useLoading/useLoading";
-import { API_URL } from "../utils/apiUrl";
+import {  Link } from "react-router-dom";
 import { noPhotoUrl, imageSource } from "../utils/utils";
-
-let IMG_URL = "https://image.tmdb.org/t/p/w500";
+import { useGenres } from "../hooks/useGenres";
 
 const Genres = (props) => {
-  const [moviesFromGenre, setMoviesFromGenre] = useState("");
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState("");
   const {
-    isLoading,
+    moviesFromGenre,
+    page,
+    setPage,
     setIsLoading,
-    loader
-  } = useLoading()
-  const { genre_id, genre_name, motion_picture } = useParams();
-
-  useEffect(() => {
-    setIsLoading(true)
-    fetch(
-      `${API_URL}/api/genres/?with_genres=${genre_id}&page=${page}&motion_picture=${motion_picture}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setMoviesFromGenre(data.results);
-        setTotalPages(data.total_pages);
-        setIsLoading(false)
-      }).catch(e => console.log(e));
-    window.scrollTo(0, 0);
-  }, [page]);
+    totalPages,
+    isLoading,
+    loader,
+    motion_picture,
+    genre_name
+  } = useGenres()
 
   let pageURL = motion_picture === "tv" ? "shows" : "movie";
 
-  const moviesFromGenreList = moviesFromGenre
-    ? moviesFromGenre.map((movie) => {
+  if(isLoading) return loader
+
+  const moviesFromGenreList = moviesFromGenre.map((movie) => {
       let url = movie.poster_path ? (imageSource + movie.poster_path) : noPhotoUrl
       return (
         <div key={movie.id} className="genre-links-container">
@@ -51,8 +36,7 @@ const Genres = (props) => {
           </Link>
         </div>
       )
-       })
-    : null;
+  })
 
   function prevPage() {
     setIsLoading(true)
@@ -65,7 +49,7 @@ const Genres = (props) => {
   }
 
   return (
-    isLoading ? (loader) : (<div className="genre-page-container">
+    <div className="genre-page-container">
       <h1>{genre_name}</h1>
       <div className="buttons-container">
         <button className="cta-btn" onClick={prevPage} disabled={page === 1}>
@@ -88,7 +72,7 @@ const Genres = (props) => {
           NEXT
         </button>
       </div>
-    </div>)
+    </div>
   );
 };
 export default Genres;
