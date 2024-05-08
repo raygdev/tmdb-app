@@ -178,7 +178,8 @@ figcaption {
         transform ease-in-out 350ms
 }
 
-.name-truncate:hover::before {
+.name-truncate:hover::before,
+a:focus .name-truncate::before {
   content: attr(data-tool-tip);
   opacity: 1;
   transform: translateY(-1.2rem);
