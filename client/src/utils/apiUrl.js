@@ -1,6 +1,6 @@
 let API_URL;
 if(process.env.NODE_ENV === "production"){
-    API_URL = 'https://eager-polo-shirt-crow.cyclic.app'
+    API_URL = 'https://tmdb-api-pi.vercel.app'
 } else {
     API_URL = "http://localhost:5000"
 }
